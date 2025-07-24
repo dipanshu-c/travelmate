@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title> Login </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Outer form wrapper */
+        .sign-in {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+            padding: 40px;
+            max-width: 900px;
+            width: 90%;
+            z-index: 1;
+            position: relative;
+        }
+
+        /* Horizontal form layout */
+        .login-page {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        /* Left pane: heading and social icons */
+        .left-pane {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: left;
+            min-width: 280px;
+        }
+
+        .left-pane h1 {
+            font-weight: lighter;
+            color: rgb(7, 87, 7);
+            margin-bottom: 10px;
+        }
+
+        .left-pane span {
+            font-size: 13px;
+            color: #333;
+        }
+
+        /* Social icon group */
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .icon {
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s ease-in-out;
+            color: #333;
+            background: #fff;
+            text-decoration: none;
+            }
+
+            .icon:hover {
+            transform: scale(1.1);
+            background-color: rgb(7, 87, 7);
+            color: white;
+        }
+
+        /* Right pane: inputs and button */
+        .right-pane {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            text-align: right;
+            min-width: 280px;
+        }
+
+        .right-pane input {
+            background-color: #eee;
+            border: none;
+            margin: 8px 0;
+            padding: 10px 15px;
+            font-size: 13px;
+            border-radius: 8px;
+            width: 100%;
+            outline: none;
+        }
+
+        .right-pane a {
+            font-size: 13px;
+            text-decoration: none;
+            color: #333;
+            margin: 10px 0;
+            background: none;
+        }
+
+        .right-pane button {
+            background-color: rgb(7, 87, 7);
+            color: white;
+            font-size: 13px;
+            padding: 10px 45px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .right-pane button:hover {
+            transform: scale(1.06);
+        }
+
+        /* Close button styling */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            font-weight: lighter;
+            color: rgb(7, 87, 7);
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="sign-in">
+
+        <button class="close-button">×</button>
+        <form id="loginForm" class="login-page" onsubmit="loginUser(event)">
+            <div class="left-pane">
+            <h1>Sign In</h1>
+            <div class="social-icons">
+                <span style="text-align: center; padding: 10px;">using</span>
+                <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+            </div>
+
+            <div class="right-pane">
+            <span style="margin: 10px;">or use your email & password</span>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <a href="#">Forget Your Password?</a>
+            <button id="signInButton" type="submit">Sign In</button>
+            </div>
+        </form>
+    </div>
+    <script>
+    </script>
+</body>
+</html>

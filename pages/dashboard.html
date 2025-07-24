@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TravelMate</title>
+  <link rel="stylesheet" href="/designs/style.css">
+</head>
+<body>
+<div class="dashboard slide-in">
+ <header>
+  <a href="#dashboard" style="text-decoration: none;"> <h2>TravelMate</h2> </a>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <div class="header-button" id="headerMenu">
+    <button onclick="loadPage('/pages/home.html')" title="Home">Home</button>
+    <button title="Discover">Discover</button>
+    <button title="Matches">Matches</button>
+    <button title="Messages">Messages</button>
+    <button title="Profile"><h4>Welcome, <span id="username-display"></span>!</h4></button>
+    <button onclick="logoutUser()" style="font-size: 25px;" title="Log Out">⤫</button>
+  </div>
+</header>
+
+  <main id="dashboard">
+    <section class="welcome-board">
+      <div class="board-content">
+        <h2>Welcome! <span id="username-display"></span> </h2>
+        <p>Find your TravelMate with us!</p>
+        <button class="board-button" href="#explore" >Start Exploring</button>
+      </div>
+    </section>
+  </main>
+  <main >
+    <div id="notification" class="notification hidden"></div>
+    <section class="explore">
+    <h3>Browse by Trending</h3>
+    <div class="filter-buttons">
+      <button onclick="filterTrips('All')">All</button>
+      <button onclick="filterTrips('UK')">Uttakakhand</button>
+      <button onclick="filterTrips('HP')">Himachal PRadesh</button>
+    </div>
+
+    <div class="trip-grid" id="tripGrid">
+      <!-- Videos will appear here -->
+    </div>
+  </section>
+  </main>
+  <footer>
+    &copy; 2025 TravelMate ISO 2001:1998. All rights reserved.
+  </footer>
+</div>
+
+
+<script>
+  function logoutUser() {
+  localStorage.removeItem("loggedInUser");
+  showNotification("You have been logged out.");
+  window.location.href = "/pages/index.html";
+}
+
+function showNotification(message, duration = 3000) {
+  console.log("Triggering notification:", message);
+  const notification = document.getElementById('notification');
+  notification.textContent = message;
+  notification.classList.remove('hidden');
+  notification.classList.add('show');
+
+  setTimeout(() => {
+    notification.classList.remove('show');
+    notification.classList.add('hidden');
+  }, duration);
+}
+
+
+function loadPage(pageUrl) {
+  const container = document.getElementById('dashboard');
+
+  container.classList.add('fade-out'); // 🔄 Start fading out
+
+  setTimeout(() => {
+    fetch(pageUrl)
+      .then(res => res.text())
+      .then(html => {
+        container.innerHTML = html;
+        container.classList.remove('fade-out'); // 🔄 Fade back in
+      })
+      .catch(error => {
+        container.innerHTML = '<p>Error loading page.</p>';
+        container.classList.remove('fade-out');
+        console.error('Loading error:', error);
+      });
+  }, 500); // Match transition duration
+}
+
+function toggleMenu() {
+  const menu = document.getElementById("headerMenu");
+  menu.classList.toggle("active");
+}
+
+document.addEventListener("click", function (event) {
+  const menu = document.getElementById("headerMenu");
+  const toggle = document.querySelector(".menu-toggle");
+
+  const clickedInside = menu.contains(event.target) || toggle.contains(event.target);
+
+  // If menu is open and clicked outside, close it
+  if (menu.classList.contains("active") && !clickedInside) {
+    menu.classList.remove("active");
+  }
+});
+
+if (!localStorage.getItem("loggedInUser")) {
+    alert("Please log in first.");
+    window.location.href = "/";
+  }
+
+  // Load user's name on dashboard
+  window.onload = function () {
+    const email = localStorage.getItem("loggedInUser");
+    if (!email) {
+      alert("You are not logged in. Redirecting to login...");
+      window.location.href = "/index.html"; // Adjust to your login page path
+      return;
+    }
+
+    const userData = JSON.parse(localStorage.getItem(email));
+    if (userData && userData.name) {
+      document.getElementById("username-display").textContent = userData.name;
+    } else {
+      document.getElementById("username-display").textContent = "User";
+    }
+  };
+
+  const trips = [
+  { title: "Valley Of Flowers", genre: "UK" },
+  { title: "Hampta Pass", genre: "HP" },
+  { title: "Kedarkantha", genre: "HP" },
+  { title: "Rudranath", genre: "UK" }
+];
+
+function filterTrips(genre) {
+  const grid = document.getElementById("tripGrid");
+  grid.innerHTML = "";
+
+  const filtered = genre === "All" ? trips : trips.filter(v => v.genre === genre);
+
+  filtered.forEach((trip, index) => {
+    const card = document.createElement("div");
+    card.className = "trip-card";
+    card.innerText = trip.title;
+
+    // Animation delay for staggered effect
+    card.style.animationDelay = `${index * 0.2}s`;
+
+    grid.appendChild(card);
+  });
+}
+
+filterTrips("All");
+
+console.log("working");
+
+function toggleMenu() {
+  const menu = document.querySelector("#dropdownMenu ul");
+  menu.classList.toggle("active");
+}
+
+  </script>
+</body>
+</html>
