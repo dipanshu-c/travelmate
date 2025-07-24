@@ -26,7 +26,7 @@
       <div class="board-content">
         <h2>Welcome! <span id="username-display"></span> </h2>
         <p>Find your TravelMate with us!</p>
-        <button class="board-button" honclick="document.getElementById('explore').scrollIntoView({ behavior: 'smooth' });">Start Exploring</button>
+        <button class="board-button" id="gotoexplore">Start Exploring</button>
       </div>
     </section>
   </main>
@@ -52,6 +52,18 @@
 
 
 <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const scrollToButton = document.getElementById('gotoexplore');
+        const targetSection = document.getElementById('explore');
+
+        gotoexplore.addEventListener('click', function() {
+            explore.scrollIntoView({
+                behavior: 'smooth', // Optional: for smooth scrolling animation
+                block: 'start' // Optional: aligns the top of the element with the top of the viewport
+            });
+        });
+    });
+
   function logoutUser() {
   localStorage.removeItem("loggedInUser");
   showNotification("You have been logged out.");
