@@ -26,13 +26,13 @@
       <div class="board-content">
         <h2>Welcome! <span id="username-display"></span> </h2>
         <p>Find your TravelMate with us!</p>
-        <button class="board-button" href="#explore" >Start Exploring</button>
+        <button class="board-button" honclick="document.getElementById('explore').scrollIntoView({ behavior: 'smooth' });">Start Exploring</button>
       </div>
     </section>
   </main>
   <main >
     <div id="notification" class="notification hidden"></div>
-    <section class="explore">
+    <section class="explore" id=""explore>
     <h3>Browse by Trending</h3>
     <div class="filter-buttons">
       <button onclick="filterTrips('All')">All</button>
