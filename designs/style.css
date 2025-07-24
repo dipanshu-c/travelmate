@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-image: url('/designs/background.jpg'); 
+    background-image: url('../designs/background.jpg'); 
     background-size: cover; 
     background-attachment: fixed;
     background-repeat: no-repeat;
