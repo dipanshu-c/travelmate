@@ -23,7 +23,7 @@ travelmate/
 ## 🚀 Getting Started
 
 1. Download or clone the repository.
-2. Open `pages/index.html` in any modern web browser.
+2. Open `index.html` in any modern web browser.
 3. Navigate through the login, register, dashboard, and home pages.
 
 ## 🛠 Technologies Used
