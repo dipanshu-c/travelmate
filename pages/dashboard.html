@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TravelMate</title>
-  <link rel="stylesheet" href="/designs/style.css">
+  <link rel="stylesheet" href="../designs/style.css">
 </head>
 <body>
 <div class="dashboard slide-in">
@@ -12,7 +12,7 @@
   <a href="#dashboard" style="text-decoration: none;"> <h2>TravelMate</h2> </a>
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
   <div class="header-button" id="headerMenu">
-    <button onclick="loadPage('/pages/home.html')" title="Home">Home</button>
+    <button onclick="loadPage('../pages/home.html')" title="Home">Home</button>
     <button title="Discover">Discover</button>
     <button title="Matches">Matches</button>
     <button title="Messages">Messages</button>
@@ -55,7 +55,7 @@
   function logoutUser() {
   localStorage.removeItem("loggedInUser");
   showNotification("You have been logged out.");
-  window.location.href = "/pages/index.html";
+  window.location.href = "../index.html";
 }
 
 function showNotification(message, duration = 3000) {
@@ -119,7 +119,7 @@ if (!localStorage.getItem("loggedInUser")) {
     const email = localStorage.getItem("loggedInUser");
     if (!email) {
       alert("You are not logged in. Redirecting to login...");
-      window.location.href = "/index.html"; // Adjust to your login page path
+      window.location.href = "../index.html"; // Adjust to your login page path
       return;
     }
 
