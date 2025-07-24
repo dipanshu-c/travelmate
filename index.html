@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TravelMate</title>
-  <link rel="stylesheet" href="/designs/style.css">
+  <link rel="stylesheet" href="designs/style.css">
 </head>
 <body>
   <div id="notification" style="background-color: green; color: white;" class="notification hidden"></div>
@@ -46,7 +46,7 @@ document.addEventListener("click", (e) => {
 function loadLoginForm() {
   const container = document.getElementById('login-page');
 
-  fetch('/pages/login-page.html') // Adjust if different
+  fetch('pages/login-page.html') // Adjust if different
     .then(res => res.text())
     .then(html => {
       container.innerHTML = html;
@@ -62,7 +62,7 @@ function loadLoginForm() {
 function loadRegisterForm() {
   const container = document.getElementById('login-page');
 
-  fetch('/pages/register-page.html') // Adjust if different
+  fetch('pages/register-page.html') // Adjust if different
     .then(res => res.text())
     .then(html => {
       container.innerHTML = html;
@@ -123,7 +123,7 @@ function attachFormListeners() {
       if (userData.password === password) {
         localStorage.setItem("loggedInUser", email);
         showNotification("Welcome back! Login successful.");
-        window.location.href = "/pages/dashboard.html"; // adjust path if needed
+        window.location.href = "pages/dashboard.html"; // adjust path if needed
       } else {
         showNotification("Invalid email or password.");
       }
