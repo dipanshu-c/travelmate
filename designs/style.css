@@ -74,7 +74,7 @@ header {
     background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    padding: 1rem 2rem;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -123,6 +123,7 @@ header {
 
   .menu-toggle {
     display: block;
+      margin-right: 2rem;
   }
 
   .header-button button {
