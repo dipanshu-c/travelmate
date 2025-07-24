@@ -15,9 +15,9 @@ travelmate/
 ├── pages/                 # Core HTML pages
 │   ├── dashboard.html
 │   ├── home.html
-│   ├── index.html
 │   ├── login-page.html
 │   └── register-page.html
+├── index.html
 ```
 
 ## 🚀 Getting Started
