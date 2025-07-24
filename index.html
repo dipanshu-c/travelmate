@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TravelMate</title>
+  <link rel="stylesheet" href="/designs/style.css">
+</head>
+<body>
+  <div id="notification" style="background-color: green; color: white;" class="notification hidden"></div>
+
+  <header>
+    <a href="#"><h2>TravelMate</h2></a>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="header-button" id="headerMenu">
+      <button title="Discover">Discover</button>
+      <button title="Profile">Profile</button>
+    </div>
+  </header>
+
+  <main id="login-page" >
+    <div class="lr-button" onclick="loadLoginForm()">Login</div>
+    <div class="lr-button" style="background-color: rgb(7, 87, 7); color: white;" onclick="loadRegisterForm()">Register</div>
+  </main>
+
+  <footer>
+    &copy; 2025 TravelMate ISO 2001:1998. <br> All rights reserved.
+  </footer>
+
+  <script>
+    // Toggle Dropdown Menu
+function toggleMenu() {
+  document.getElementById("headerMenu").classList.toggle("active");
+}
+
+// Close dropdown if clicking outside
+document.addEventListener("click", (e) => {
+  const menu = document.getElementById("headerMenu");
+  const toggle = document.querySelector(".menu-toggle");
+  if (menu && !menu.contains(e.target) && !toggle.contains(e.target)) {
+    menu.classList.remove("active");
+  }
+});
+
+// Load Login Form from external file
+function loadLoginForm() {
+  const container = document.getElementById('login-page');
+
+  fetch('/pages/login-page.html') // Adjust if different
+    .then(res => res.text())
+    .then(html => {
+      container.innerHTML = html;
+      attachFormListeners(); // Attach events after loading
+    })
+    .catch(err => {
+      container.innerHTML = "<p>Error loading login form.</p>";
+      console.error("Failed to load login-page.html:", err);
+    });
+}
+
+// Load Register Form from external file
+function loadRegisterForm() {
+  const container = document.getElementById('login-page');
+
+  fetch('/pages/register-page.html') // Adjust if different
+    .then(res => res.text())
+    .then(html => {
+      container.innerHTML = html;
+      attachFormListeners(); // Attach events after loading
+    })
+    .catch(err => {
+      container.innerHTML = "<p>Error loading register form.</p>";
+      console.error("Failed to load register-page.html:", err);
+    });
+}
+
+// Attach listeners to form buttons
+function attachFormListeners() {
+  const closeBtn = document.querySelector('.close-button');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      location.reload(); // reload to reset view
+    });
+  }
+
+  // Register Form Logic
+  const registerForm = document.querySelector('form.register-page');
+  if (registerForm) {
+    registerForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!name || !email || !password) {
+        showNotification("Please fill in all fields.");
+        return;
+      }
+
+      // Save user to localStorage
+      const userData = { name, password };
+      localStorage.setItem(email, JSON.stringify(userData));
+      showNotification(`Registration successful.`);
+      loadLoginForm();
+    });
+  }
+
+  // Login Form Logic
+  const loginForm = document.querySelector('form.login-page');
+  if (loginForm) {
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      const storedData = localStorage.getItem(email);
+      if (!storedData) {
+        showNotification("User not registered.");
+        return;
+      }
+
+      const userData = JSON.parse(storedData);
+      if (userData.password === password) {
+        localStorage.setItem("loggedInUser", email);
+        showNotification("Welcome back! Login successful.");
+        window.location.href = "/pages/dashboard.html"; // adjust path if needed
+      } else {
+        showNotification("Invalid email or password.");
+      }
+    });
+  }
+}
+
+function showNotification(message, duration = 3000) {
+  console.log("Triggering notification:", message);
+  const notification = document.getElementById('notification');
+  notification.textContent = message;
+  notification.classList.remove('hidden');
+  notification.classList.add('show');
+
+  setTimeout(() => {
+    notification.classList.remove('show');
+    notification.classList.add('hidden');
+  }, duration);
+}
+
+  </script>
+
+</body>
+</html>
