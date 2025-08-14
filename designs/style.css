@@ -1,327 +1,237 @@
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-image: url('https://raw.githubusercontent.com/dipanshu-c/travelmate/refs/heads/main/designs/background.jpg'); 
-    background-size: cover; 
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    
-    }
-
-body::-webkit-scrollbar{
-  width: 0;
-  height: 0;
+/* Root Colors & Variables */
+:root {
+  --primary: #1ABC9C;
+  --primary-light: #A8E6CF;
+  --secondary: #FF6F61;
+  --secondary-light: #FFD3B6;
+  --bg-light: #FAFAFA;
+  --bg-section: #FFFFFF;
+  --text-dark: #2C3E50;
+  --text-muted: #7F8C8D;
+  --shadow-light: rgba(0, 0, 0, 0.05);
+  --shadow-medium: rgba(0, 0, 0, 0.15);
 }
-.fade-out {
-  opacity: 0;
-  transition: opacity 0.8s ease;
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  opacity: 0;
-  animation: fadeIn 0.8s ease forwards;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
+h1, h2, h3, h4 {
+  font-family: 'Poppins', sans-serif;
+  padding: 0%;
+  margin: 0 ;
 }
 
-/* Base state */
-.notification {
-  position: fixed;
-  top: 80px;
-  left: 40%;
-  background-color: #d4edd4;
-  color: rgb(240, 9, 9);
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-family: sans-serif;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  z-index: 1000;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-.notification.hidden {
-  opacity: 0;
-}
-.notification.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-
-#dashboard {
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
-
-/* Hidden state (fade-out) */
-#dashboard.fade-out {
-  opacity: 0;
-}
-
-
-
-header {
-    position:fixed;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    top: 0;
-    z-index: 1000;
-    max-height: 2rem;
-    width: 98%;
-}
-
-.menu-toggle {
-  display: none;
-  font-size: 2rem;
-  cursor: pointer;
-}
-
-.header-button {
+/* Navbar */
+.navbar {
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap; /* Allows wrapping on small screens */
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 10px var(--shadow-light);
+  z-index: 1000;
+  backdrop-filter: blur(10px);
 }
 
-@media (max-width: 768px) {
-  .header-button {
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(15px);
-    border-radius: 10px;
-    padding: 0rem 1rem;
-    z-index: 1000;
-    margin: 2rem 0rem 0rem 0rem;
-    /* Animation-friendly state */
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.4s ease, opacity 0.4s ease;
-  }
-
-  .header-button.active {
-    max-height: 500px; /* adjust based on content height */
-    padding: 1rem;
-    opacity: 1;
-  }
-
-  .menu-toggle {
-    display: block;
-      margin-right: 2rem;
-  }
-
-  .header-button button {
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-
-  .header-button.active button {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-#login-page {
-  opacity: 1;
-  transform: scale(0.95);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-#login-page.visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-
-header button {
-    cursor: pointer;
-    color: rgb(7, 87, 7);
-    background: none;
-    border:none;
-    border-radius:8px;
-    transition: transform 0.2s ease-in-out;
-    margin: 0px 5px;
-    font-size: large;
-}
-
-header button:hover{
-    transform: scale(1.06);
-}
-
-header h2{
-    color: rgb(7, 87, 7);
-    margin: 0;
-    text-decoration: none;
-}
-header a{
+.navbar a {
+  padding: 8px;
+  margin: 0.5rem 1rem;
+  font-weight: 500;
+  position: relative;
+  color: var(--text-dark);
+  transition: color 0.3s ease;
   text-decoration: none;
 }
 
-main{
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 3rem;
-    gap: 30px;
-    justify-content: center;
-    padding: 40px 20px;
-    text-align: center;
-    min-height: 65vh;
-    scrollbar-width: none; /* For Firefox */
-   -ms-overflow-style: none; /* For Internet Explorer and Edge */
-   opacity: 1;
-   transition: opacity 0.5s ease-in-out;
+.navbar a img {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin: 0.3rem;
+  padding-bottom: 5px;
 }
 
-.lr-button {
-    color: rgb(7, 87, 7);
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border-radius: 20px;
-    padding: 15px;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.06);
-    width: 100px;
-    height: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
+.navbar a:hover {
+  color: var(--primary);
 }
 
-.lr-button:hover {
-    transform: scale(1.06);
-}
-
-footer {
-  bottom: 0;
+.navbar a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
   left: 0;
+  bottom: -4px;
+  transition: width 0.3s ease;
+}
+
+.navbar a:hover::after {
   width: 100%;
-  padding: 10px;
-  text-align: center;
-  font-size: 13px;
 }
 
-/* styles for welcome boards in dashboard*/
-.welcome-board {
-    color: rgb(7, 87, 7);
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border-radius: 20px;
-    height: 40vh;
-    width: 60vh;
+/* Section Styling */
+section {
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+  margin: 2rem auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px var(--shadow-light);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 1200px;
 }
 
-.board-content {
-  padding: 2rem;
-  text-align: center;
-  border-radius: 10px;
-  display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+section:nth-child(even) {
+  background: linear-gradient(135deg, #fdfdfd 0%, #f5fafa 100%);
 }
 
-.board-content button, .filter-buttons button{
-    color: rgb(7, 87, 7);
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.06);
-    width: fit-content;
-    height: 10px;
-    border-width: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-}
-
-.explore{
-  padding: 2rem;
-  margin-top: 3rem;
-}
-
-button:hover {
-    transform: scale(1.06);
-}
-.filter-buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  color: rgb(7, 87, 7);
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  padding: 10px;
-  border-radius: 20px ;
-}
-.trip-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
-}
-
-.trip-card {
-  color: rgb(7, 87, 7);
-  background: rgba(255, 255, 255, 0.6);
-   backdrop-filter: blur(2px);
-   -webkit-backdrop-filter: blur(2px);
-  padding: 1rem;
-  text-align: center;
-  border-radius: 8px;
-  opacity: 0;
-  min-height: 20vh;
-  min-width: 15vh;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease forwards;
-  transition: transform 0.6s ease, box-shadow 0.3s ease;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-.trip-card:hover{
+section:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 6px 25px var(--shadow-medium);
 }
 
-@keyframes slideIn {
-  to {
-    transform: translateX(0);
-    opacity: 1;
+/* Links in sections */
+#about a, #contact a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: bold;
+  padding: 8px;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+#about a:hover, #contact a:hover {
+  color: var(--primary);
+  transform: translateY(-3px);
+}
+
+/* Card Grid Responsive */
+.card-grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+  align-content: start;
+  justify-content: center;
+  align-items: start;
+  justify-items: start;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#projects .card {
+  min-height: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card {
+    background: var(--bg-section);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px var(--shadow-light);
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 10rem;
+    min-width: 20rem;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 30px var(--shadow-medium);
+}
+
+.card img {
+  border-radius: 8px;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;  /* Ensures it centers in its container */
+  padding: 0;    /* No extra padding outside */
+}
+
+/* Buttons */
+.btn {
+  background: var(--primary-light);
+  color: var(--text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: var(--secondary-light);
+  color: var(--text-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px var(--shadow-medium);
+}
+
+/* Footer */
+footer {
+  background: var(--bg-section);
+  text-align: center;
+  padding: 0.2rem;
+  color: var(--text-muted);
+  box-shadow: 0 -2px 10px var(--shadow-light);
+}
+
+footer a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+/* ----------------------------------
+   RESPONSIVE MEDIA QUERIES
+---------------------------------- */
+
+/* Mobile: 1 column grid */
+@media (max-width: 600px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    min-width: 21rem;
+    max-width: 21rem;
+    max-height: 6rem;
+    margin: 0 auto;
+    padding: auto;
+  }
+  section {
+    padding: 2rem 1.5rem;
+    max-width: 80%;
   }
 }
+
+/* Tablet: 2 column grid */
+@media (min-width: 601px) and (max-width: 900px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .card {
+    min-width: auto;
+    max-width: 21rem;
+    max-height: 6rem;
+    margin: 0 auto;
+    padding: auto;
+  }
+  section {
+    padding: 3rem 1.5rem;
+    max-width: 80%;
+  }
+}
+
